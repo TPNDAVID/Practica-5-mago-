@@ -43,18 +43,22 @@ public class Mago {
         while (true) {
             boolean todosPasaron = true;
 
-            for (int i = 0; i < jugadores.size(); i++) {
-                String jugador = jugadores.get(i);
+            Iterator<String> iteradorJugadores = jugadores.iterator();
+            int indice = 0;
 
-                if (!jugadoresPasaron[i]) {
+            while (iteradorJugadores.hasNext()) {
+                String jugador = iteradorJugadores.next();
+
+                if (!jugadoresPasaron[indice]) {
                     if (ConsoleUI.preguntarContinuar(jugador)) {
                         todosPasaron = false;
                         procesarPalabra(jugador);
                     } else {
-                        jugadoresPasaron[i] = true;
+                        jugadoresPasaron[indice] = true;
                         System.out.println(jugador + " ha pasado turno");
                     }
                 }
+                indice++;
             }
 
             if (todosPasaron) {
@@ -76,6 +80,7 @@ public class Mago {
             }
         }
     }
+
 
     private void procesarPalabra(String jugador) {
         String palabra = ConsoleUI.ingresarPalabra(jugador, modoDeJuego).toUpperCase();
