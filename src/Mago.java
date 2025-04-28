@@ -27,7 +27,7 @@ public class Mago {
 
     public void iniciarJuego() {
         for (int round = 1; round <= 3; round++) {
-            System.out.println("\n============ RONDA " + round + " ============");
+            System.out.println("\n================= INICIO DE LA RONDA " + round + " =================");
             jugarRonda();
         }
         ConsoleUI.mostrarPuntajeFinal(puntajeJugador);

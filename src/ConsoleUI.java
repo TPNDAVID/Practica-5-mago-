@@ -13,29 +13,29 @@ public class ConsoleUI {
     }
 
     public static int modoSeleccionado() {
-        System.out.print("Selecciona el modo de juego (1: Regular, 2: Experto): ");
+        System.out.print("Selecciona el modo de juego ([1] MODO REGULAR, [2] MODO EXPERTO): ");
         return scanner.nextInt();
     }
 
     public static void mostrarReglas(int mode) {
         if (mode == 1) {
-            System.out.println("\nREGLAS DEL MODO REGULAR:");
+            System.out.println("\n======== REGLAS DEL MODO REGULAR ========");
             System.out.println("* Sin acentos ni Ñ");
             System.out.println("* 5 pts por vocal, 3 pts por consonante");
             System.out.println("* -5 pts por palabra inválida");
         } else {
-            System.out.println("\nREGLAS DEL MODO EXPERTO:");
+            System.out.println("\n======== REGLAS DEL MODO EXPERTO ========");
             System.out.println("* Acentos obligatorios donde corresponda");
             System.out.println("* Incluye letra Ñ (20% de probabilidad)");
             System.out.println("* -10 pts por palabra inválida");
         }
     }
     public static void mostrarLetras(Set<Character> letras) {
-        System.out.println("\nLetras disponibles: " + letras);
+        System.out.println("\nLAS 10 LETRAS GENERADAS SON: " + letras);
     }
 
     public static boolean preguntarContinuar(String jugador) {
-        System.out.print("Jugador [" + jugador + "], ¿vas a escribir una palabra? [s/n]: ");
+        System.out.print("Jugador [" + jugador + "], ¿vas a escribir una palabra? [s] ó [n]: ");
         return scanner.next().equalsIgnoreCase("s");
     }
 
@@ -66,6 +66,6 @@ public class ConsoleUI {
                 .forEach(e -> System.out.println(e.getKey() + ": " + e.getValue() + " puntos"));
 
         String ganador = Collections.max(scores.entrySet(), Map.Entry.comparingByValue()).getKey();
-        System.out.println("\nEl ganador del juego es " + ganador + "!");
+        System.out.println("\nEl ganador del juego es " + ganador);
     }
 }
