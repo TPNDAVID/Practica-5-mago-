@@ -16,7 +16,7 @@ public class Mago {
         this.diccionario = new Diccionario(modoDeJuego);
 
         try {
-            diccionario.loadFromFile("src\\diccionariopalabras.txt");
+            diccionario.loadFromFile("src\\Diccionario.txt");
         } catch (IOException e) {
             System.err.println("Error al cargar el diccionario: " + e.getMessage());
             System.exit(1);
