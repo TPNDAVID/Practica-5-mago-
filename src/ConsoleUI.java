@@ -30,5 +30,18 @@ public class ConsoleUI {
             System.out.println("* -10 pts por palabra inválida");
         }
     }
+    public static void mostrarLetras(Set<Character> letras) {
+        System.out.println("\nLetras disponibles: " + letras);
+    }
 
+    public static boolean preguntarContinuar(String jugador) {
+        System.out.print("Jugador [" + jugador + "], ¿vas a escribir una palabra? [s/n]: ");
+        return scanner.next().equalsIgnoreCase("s");
+    }
+
+    public static String ingresarPalabra(String jugador, int mode) {
+        scanner.nextLine();
+        System.out.print(jugador + ", escribe tu palabra: ");
+        return scanner.nextLine().trim();
+    }
 }
