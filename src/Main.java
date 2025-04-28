@@ -6,16 +6,25 @@ public class Main {
 
         System.out.println("EL MAGO DE LAS PALABRAS");
 
-        System.out.print("Número de jugadores [2-4]: ");
-        int numPlayers = scanner.nextInt();
-        scanner.nextLine();
+        int numJugadores;
+        while (true) {
+            System.out.print("Número de jugadores [2-4]: ");
+            try {
+                numJugadores = scanner.nextInt();
+                scanner.nextLine();
 
-        if (numPlayers < 2 || numPlayers > 4) {
-            System.out.println("Deben ser 2-4 jugadores.");
-            return;
+                if (numJugadores >= 2 && numJugadores <= 4) {
+                    break;
+                } else {
+                    System.out.println("Deben ser entre 2 y 4 jugadores");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Ingresa un número válido");
+                scanner.nextLine();
+            }
         }
 
-        List<String> players = ConsoleUI.getJugadores(numPlayers);
+        List<String> players = ConsoleUI.getJugadores(numJugadores);
         int mode = ConsoleUI.modoSeleccionado();
         ConsoleUI.mostrarReglas(mode);
 
