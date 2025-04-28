@@ -44,4 +44,28 @@ public class ConsoleUI {
         System.out.print(jugador + ", escribe tu palabra: ");
         return scanner.nextLine().trim();
     }
+
+    public static void mostrarPuntos(String palabra, int puntos) {
+        System.out.println("PALABRA VÁLIDA '" + palabra + "' +" + puntos + " puntos");
+    }
+
+    public static void mostrarPalabraInvalida() {
+        System.out.println("PALABRA INVÁLIDA. Penalización aplicada.");
+    }
+
+    public static void mostrarPuntuaciones(HashMap<String, Integer> puntuaciones) {
+        System.out.println("\nPuntuaciones de los jugadores:");
+        puntuaciones.forEach((jugador, puntos) ->
+                System.out.println(jugador + ": " + puntos + " puntos"));
+    }
+
+    public static void mostrarPuntajeFinal(HashMap<String, Integer> scores) {
+        System.out.println("\nPuntuaciones finales:");
+        scores.entrySet().stream()
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .forEach(e -> System.out.println(e.getKey() + ": " + e.getValue() + " puntos"));
+
+        String ganador = Collections.max(scores.entrySet(), Map.Entry.comparingByValue()).getKey();
+        System.out.println("\nEl ganador del juego es " + ganador + "!");
+    }
 }
