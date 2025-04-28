@@ -98,4 +98,18 @@ public class Mago {
         ConsoleUI.mostrarPuntuaciones(puntajeJugador);
     }
 
+    private boolean validarPalabra(String palabra) {
+        return diccionario.contienePalabra(palabra, modoDeJuego) &&
+                letrasValidas(palabra);
+    }
+
+    private boolean letrasValidas(String palabra) {
+        for (char letra : palabra.toCharArray()) {
+            if (!letrasActuales.contains(Character.toUpperCase(letra))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
