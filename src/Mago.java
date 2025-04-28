@@ -112,4 +112,31 @@ public class Mago {
         return true;
     }
 
+    private Set<Character> generarLetras(int cantidad) {
+        Random random = new Random();
+        Set<Character> letras = new HashSet<>();
+        String vocalesBasicas = "AEIOU";
+        String vocalesAcentuadas = "ÁÉÍÓ";
+        String consonantes = "BCDFGHJKLMNPQRSTVWXYZ";
+        String consonantesExpertas = "BCDFGHJKLMNPQRSTVWXYZÑ";
+
+        for (int i = 0; i < 4; i++) {
+            letras.add(vocalesBasicas.charAt(random.nextInt(vocalesBasicas.length())));
+        }
+
+        if (modoDeJuego == 2) {
+            letras.add(vocalesAcentuadas.charAt(random.nextInt(vocalesAcentuadas.length())));
+            if (random.nextDouble() <= 0.2) {
+                letras.add('Ñ');
+            }
+        }
+
+        String fuenteConsonantes = (modoDeJuego == 2) ? consonantesExpertas : consonantes;
+        while (letras.size() < cantidad) {
+            char c = fuenteConsonantes.charAt(random.nextInt(fuenteConsonantes.length()));
+            letras.add(c);
+        }
+        return letras;
+    }
+
 }
