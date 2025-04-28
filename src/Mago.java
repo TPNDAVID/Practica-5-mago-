@@ -32,3 +32,70 @@ public class Mago {
         }
         ConsoleUI.mostrarPuntajeFinal(puntajeJugador);
     }
+
+    private void jugarRonda() {
+        letrasActuales = generarLetras(10);
+        palabrasUsadas.clear();
+        boolean[] jugadoresPasaron = new boolean[jugadores.size()];
+
+        ConsoleUI.mostrarLetras(letrasActuales);
+
+        while (true) {
+            boolean todosPasaron = true;
+
+            for (int i = 0; i < jugadores.size(); i++) {
+                String jugador = jugadores.get(i);
+
+                if (!jugadoresPasaron[i]) {
+                    if (ConsoleUI.preguntarContinuar(jugador)) {
+                        todosPasaron = false;
+                        procesarPalabra(jugador);
+                    } else {
+                        jugadoresPasaron[i] = true;
+                        System.out.println(jugador + " ha pasado turno");
+                    }
+                }
+            }
+
+            if (todosPasaron) {
+                System.out.println("\nTerminó la ronda porque todos los jugadores han pasado");
+                break;
+            }
+
+            boolean algunoActivo = false;
+            for (boolean paso : jugadoresPasaron) {
+                if (!paso) {
+                    algunoActivo = true;
+                    break;
+                }
+            }
+
+            if (!algunoActivo) {
+                System.out.println("\nTerminó la ronda porque todos los jugadores han pasado");
+                break;
+            }
+        }
+    }
+
+    private void procesarPalabra(String jugador) {
+        String palabra = ConsoleUI.ingresarPalabra(jugador, modoDeJuego).toUpperCase();
+
+        if (palabrasUsadas.contains(palabra)) {
+            System.out.println("Esta palabra ya se usó en esta ronda");
+            return;
+        }
+        palabrasUsadas.add(palabra);
+
+        if (validarPalabra(palabra)) {
+            int puntos = diccionario.obtenerPuntos(palabra);
+            puntajeJugador.merge(jugador, puntos, Integer::sum);
+            ConsoleUI.mostrarPuntos(palabra, puntos);
+        } else {
+            int penalizacion = (modoDeJuego == 1) ? -5 : -10;
+            puntajeJugador.merge(jugador, penalizacion, Integer::sum);
+            ConsoleUI.mostrarPalabraInvalida();
+        }
+        ConsoleUI.mostrarPuntuaciones(puntajeJugador);
+    }
+
+}
